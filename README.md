@@ -12,7 +12,7 @@
  <br /><br />
 <h5>REFERENCES:</h5>
 <ol>
-  <li><a herf='https://github.com/jacobscarter/Twitter-API-with-Node-and-Express'>https://github.com/jacobscarter/Twitter-API-with-Node-and-Express</a></li>
+  <li>(https://github.com/jacobscarter/Twitter-API-with-Node-and-Express)</li>
   <li><a href='https://github.com/BoyCook/TwitterJSClient'>https://github.com/BoyCook/TwitterJSClient</a></li>
 </ol>
 <hr>
