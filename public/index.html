@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+  <head>
+    <title>FeederBot</title>
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1, maximum-scale=1">
+	<style>
+	body{
+	display: flex;
+    flex-direction: column;
+    align-items: center;
+	}
+	.welcome-text{
+	font-size:28px;
+    font-weight: 800;
+	}
+	.usersearch{
+	width:98%;
+    margin:1%0%;
+    border: 4px solid;
+    border-radius: 20px;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+	}
+	.usersearch-result{
+	font-size: 12px;
+    font-weight: 600;
+	border: 2px double;
+    border-radius: 10px;
+    padding: 0%;
+    overflow: hidden;
+	}
+	.usersearch-info{
+	display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+	}
+	.tweetcard{
+	text-align:center;
+	width: 95%;
+    margin: 1% 0%;
+    padding: 0% 5%;
+    border: 1px dashed;
+    border-radius: 20px;
+	}
+	.inforow{
+    display: flex;
+    align-items: center;
+    font-size: 8px;
+    margin: 1%;
+	}
+	</style>
+    <!-- Bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet" media="screen">
+  </head>
+  <body ng-controller="tweetCtrl" class="home">
+  
+  <h2 class="welcome-text text-center">Welcome to the home of the FeederBot</h2>
+
+  <div class="tweetcard" ng-repeat="tweet in tweets">
+  <p style="font-weight: 600;">{{tweet.user.name}}</p>
+  <p style="font-size: 16px;">{{tweet.text}}</p>
+  <p style="font-size: 12px;" ng-if="tweet.entities.user_mentions.length>0">Mentioned Name: {{tweet.entities.user_mentions[0].name}}</p>
+  <p style="font-size: 12px;" ng-if="tweet.entities.user_mentions.length>0">Mentioned Handle: {{tweet.entities.user_mentions[0].screen_name}}</p>
+  <div class="inforow"><img src="icons/created_at.png" style="height: 10px;margin-right: 5px;"></img>Creation Time: {{tweet.created_at}}</div>
+  <div class="inforow"><img src="icons/location.png" style="height: 10px;margin-right: 5px;"></img>Posted From: {{tweet.user.location}}</div>
+  <div class="inforow"><img src="icons/retweet.png" style="height: 10px;margin-right: 5px;"></img>Retweet Count: {{tweet.retweet_count}}</div>
+  <div class="inforow"><img src="icons/favourite.png" style="height: 10px;margin-right: 5px;"></img>Favourite Count: {{tweet.favorite_count}}</div>
+  </div>
+
+    <div class="usersearch" ng-controller="userCtrl">
+      <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <h4 style="font-size: 22px;" class="text-center">Search Twitter handles here!</h4>
+        </div>
+      </div>
+      <div class="row" style="margin:1%0%;">
+        <div class="col-xs-12">
+          <input class="form-control" type="text" placeholder="Search for twitter handles here" ng-model="userName">
+		  <br />
+          <p class="text-center"><button class="btn btn-primary" ng-click="getUser(userName)">Search User</button></p>
+        </div>
+      </div>
+      <div class="row" ng-if="twitterErrors">
+        <div class="col-xs-12">
+          <div class="alert alert-danger">
+            {{twitterErrors}}
+          </div>
+        </div>
+      </div>
+      <div class="usersearch-result" style="margin: 1% 0%;display: flex;" ng-if="results">
+        <div style="width: 20%;overflow: hidden;">
+          <img style="width:100%;height:100%;" ng-src="{{results.profile_image_url_https}}"></img>
+        </div>
+		<div class="usersearch-info" style="width: 60%;padding: 0% 2%;">
+		  <p style="margin:0;">Name: {{results.name}}</p>
+		  <p style="margin:0;">Twitter handle: {{results.screen_name}}</p>
+		</div>
+        <div style="width: 20%;display: flex;">
+		<!--BUTTON-->
+		<button style="width: 100%;white-space: pre-line;" class="btn btn-primary" ng-click="getTweets(results.screen_name)">Get Tweets</button>
+        </div>
+      </div>
+	  </div>
+	</div>
+
+    <script src="//code.jquery.com/jquery-2.1.3.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.8/angular.min.js"></script>
+
+    <script src="/app.js"></script>
+  </body>
+</html>
