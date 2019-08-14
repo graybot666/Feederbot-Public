@@ -51,13 +51,13 @@
 	}
 	</style>
     <!-- Bootstrap -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet" media="screen">
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet" media="screen">
   </head>
   <body ng-controller="tweetCtrl" class="home">
-  
   <h2 class="welcome-text text-center">Welcome to the home of the FeederBot</h2>
+  <h5 class="alert alert-danger text-center" ng-if="refreshTime!==null">Will Refresh Feed in {{refreshTime}} Seconds</h5>
 
-  <div class="tweetcard" ng-repeat="tweet in tweets">
+  <div ng-click="markRead($index)" class="tweetcard" ng-repeat="tweet in tweets track by $index">
   <p style="font-weight: 600;">{{tweet.user.name}}</p>
   <p style="font-size: 16px;">{{tweet.text}}</p>
   <p style="font-size: 12px;" ng-if="tweet.entities.user_mentions.length>0">Mentioned Name: {{tweet.entities.user_mentions[0].name}}</p>
@@ -84,7 +84,7 @@
       </div>
       <div class="row" ng-if="twitterErrors">
         <div class="col-xs-12">
-          <div class="alert alert-danger">
+          <div class="alert alert-danger text-center">
             {{twitterErrors}}
           </div>
         </div>
@@ -98,8 +98,7 @@
 		  <p style="margin:0;">Twitter handle: {{results.screen_name}}</p>
 		</div>
         <div style="width: 20%;display: flex;">
-		<!--BUTTON-->
-		<button style="width: 100%;white-space: pre-line;" class="btn btn-primary" ng-click="getTweets(results.screen_name)">Get Tweets</button>
+		<button style="width: 100%;white-space: pre-line;" class="btn btn-primary" ng-click="addHandleToWatch(results.screen_name)">Watch Handle</button>
         </div>
       </div>
 	  </div>
@@ -107,9 +106,8 @@
 
     <script src="//code.jquery.com/jquery-2.1.3.min.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.8/angular.min.js"></script>
-
     <script src="/app.js"></script>
   </body>
 </html>
+

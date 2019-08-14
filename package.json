@@ -5,7 +5,12 @@
     "author": "Gary Da Robot",
     "scripts": {
         "build": "npm i",
+        "heroku-postbuild": "npm i",
         "start": "node index.js"
+    },
+    "engines": {
+        "node": "10.3.0",
+        "npm": "6.4.1"
     },
     "dependencies": {
         "body-parser": "^1.12.2",
