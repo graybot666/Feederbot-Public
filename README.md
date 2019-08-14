@@ -1,9 +1,11 @@
 <h1><strong>PUBLIC REPO FILES</strong></h1>
 <br />
 <hr>
-<h3>Try out our webapp here: <a href="https://feederb0t.herokuapp.com">https://feederb0t.herokuapp.com</a></h3>
+<h3>Try out our webapp here:</h3>
+<p><a href="https://feederb0t.herokuapp.com">https://feederb0t.herokuapp.com</a></p>
 <br />
-<h3>Pull the source code from our public repository: https://github.com/graybot666/Feederbot-Public</h3>
+<h3>Pull the source code from our public repository:</h3>
+<p>https://github.com/graybot666/Feederbot-Public</p>
 <br />
 <hr>
 <h3>INSTALLATION:</h3>
@@ -13,7 +15,7 @@
       <li>npm run-script build // To pull node_modules</li>
       <li>npm run-script start // To start server</li>
     </ul>
-  <li>Open browser window to http://localhost:3000/</li>
+  <li>Open browser window to <code>http://localhost:3000/</code></li>
  </ol>
  <br />
  <hr>
