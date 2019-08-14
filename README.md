@@ -1,6 +1,11 @@
 <h1><strong>PUBLIC REPO FILES</strong></h1>
 <br />
 <hr>
+<h3>Try out our webapp here: <a href="https://feederb0t.herokuapp.com">https://feederb0t.herokuapp.com</a></h3>
+<br />
+<h3>Pull the source code from our public repository: https://github.com/graybot666/Feederbot-Public</h3>
+<br />
+<hr>
 <h3>INSTALLATION:</h3>
 <ol><li>REPLACE API KEYS IN index.js (You can set up a new twitter app for this)</li>
   <li>Run these commands in project root directory (Require node.js and npm for these steps):</li>
