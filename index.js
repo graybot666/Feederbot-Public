@@ -51,9 +51,9 @@ app.post('/twitter/user', function (req, res) {
 //post to retrieve tweets
 app.post('/twitter/gettweets', function (req, res) {
 	var username = req.body.username;
-	var data=twitter.getUserTimeline({screen_name: username, count: 10}, function(error, response, body){
+	var data=twitter.getUserTimeline({screen_name: username, count: 10, trim_user: false}, function(error, response, body){
 		res.status(404).send({
-			"error" : "User Not Found"
+			"error" : "User has no public tweets"
 		});
 	}, function(data){
 		res.send({
@@ -64,7 +64,9 @@ app.post('/twitter/gettweets', function (req, res) {
 	});
 });
 
-var server = app.listen(process.env.PORT || 3000,function(){
-	var host=server.address().address;
-	var port=server.address().port;
+// FOR LOCAL
+var server = app.listen(3000, function () {
+   	var host = server.address().address;
+  	var port = server.address().port;
 });
+
