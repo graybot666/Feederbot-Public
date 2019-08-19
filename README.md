@@ -1,6 +1,14 @@
 <h1><strong>PUBLIC REPO FILES</strong></h1>
 <br />
 <hr>
+<h3>CHANGELOG:</h3>
+<h5>19th August 2019:</h5>
+<ul>
+  <li>Added auto refresh to pull tweets every <strong>60 sec</strong></li>
+  <li>Fixed mark as read</li>
+</ul>
+<br />
+<hr>
 <h3>TRY IT:</h3>
 <p><a href="https://feederb0t.herokuapp.com">https://feederb0t.herokuapp.com</a></p>
 <br />
