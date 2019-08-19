@@ -22,17 +22,18 @@ app.controller('tweetCtrl', function($scope, TwitterGetTweetsService){
 	$scope.addHandleToWatch = function(username){
 		$scope.handlesWatch.push(username);
 		//window.localStorage.setItem('handles',$scope.handlesWatch);
-		$scope.pullnewTweets(username);
+		//$scope.pullnewTweets(username);
+		$scope.startPolling();
 	}
 	$scope.startCountDown = function(){
-		setInterval(function(){$scope.refreshTime-=1;}, 1000);
+		setInterval(function(){$scope.refreshTime-=1;}, 1000 );
 	}
 	$scope.startPolling = function(){
-		setInterval(function(){ $scope.pullallTweets() }, 30000);
+		$scope.pullallTweets();
+		setInterval(function(){ $scope.pullallTweets(); }, 60000 );
 	}
 	$scope.pullallTweets = function(){
 		$scope.handlesWatch.forEach(handle => {
-			// console.log('Polling : '+handle);
 			$scope.pullnewTweets(handle);
 		});
 	}
@@ -41,16 +42,10 @@ app.controller('tweetCtrl', function($scope, TwitterGetTweetsService){
 		.then(function(data){
 			$scope.twitterErrors = undefined;
 			var newTweets = JSON.parse(data.result.tweetData);
-			if ($scope.readTweetsID.length===0){
-				newTweets.forEach(el=>{
-					$scope.tweets.push(el);
-				});
-			} else if ($scope.readTweetsID.length>=1){
 				let sanitizedData=$scope.sanitizeData( newTweets );
 				sanitizedData.forEach(el => {
 					$scope.tweets.push(el);
 				});
-			}
 		})
 		.catch(function(error){
 			console.error('there was an error retrieving data: ', error);
@@ -60,9 +55,9 @@ app.controller('tweetCtrl', function($scope, TwitterGetTweetsService){
 	$scope.sanitizeData = function(data){
 		//Filter for tweets that already exist in DOM
 		for (let i = 0; i < data.length; i++) {
-			const tweetID = data[i].id_str;
+			const tweetID = data[i].id;
 			$scope.tweets.forEach(el => {
-				if (el.id_str===tweetID){
+				if (el.id===tweetID){
 					data.splice(i,1);
 					i-=1;
 				}
@@ -70,7 +65,7 @@ app.controller('tweetCtrl', function($scope, TwitterGetTweetsService){
 		}
 		//Filter for unread tweets
 		for (let i = 0; i < data.length; i++) {
-			const tweetID = data[i].id_str;
+			const tweetID = data[i].id;
 			$scope.readTweetsID.forEach(el => {
 				if (el===tweetID){
 					data.splice(i,1);
@@ -85,7 +80,12 @@ app.controller('tweetCtrl', function($scope, TwitterGetTweetsService){
 		$scope.addtoLocalStorage(removedTweet);
 	}
 	$scope.addtoLocalStorage = function(tweet){
-		$scope.readTweetsID.push(tweet[0].id_str);
+		$scope.readTweetsID.push(tweet[0].id);
+		const uniqueIDS = (value, index, self) => { 
+			return self.indexOf(value) === index;
+		}
+		let filteredtweetIDS = $scope.readTweetsID.filter( uniqueIDS );
+		$scope.readTweetsID = filteredtweetIDS;
 		//window.localStorage.setItem('readTweets',$scope.readTweets);
 	}
 });

@@ -1,6 +1,6 @@
 {
-    "name": "FeederBot",
-    "description": "Twitter JS Client",
+    "name": "tweet-watcher",
+    "description": "Twitter NodeJS Client to watch multiple handles",
     "version": "0.0.1",
     "author": "Gary Da Robot",
     "scripts": {
